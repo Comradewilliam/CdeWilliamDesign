@@ -35,10 +35,10 @@ export const Header: React.FC = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink href="#services">Services</NavLink>
-            <NavLink href="#portfolio">Portfolio</NavLink>
-            <NavLink href="#about">About</NavLink>
-            <NavLink href="#blog">Blog</NavLink>
+            <NavLink href="/services">Services</NavLink>
+            <NavLink href="/portfolio">Portfolio</NavLink>
+            <NavLink href="/about">About</NavLink>
+            <NavLink href="/blog">Blog</NavLink>
             <NavLink href="/contact">Contact</NavLink>
             <a 
               href="/contact"
@@ -61,10 +61,10 @@ export const Header: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
-              <MobileNavLink href="#services" onClick={() => setIsMenuOpen(false)}>Services</MobileNavLink>
-              <MobileNavLink href="#portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</MobileNavLink>
-              <MobileNavLink href="#about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
-              <MobileNavLink href="#blog" onClick={() => setIsMenuOpen(false)}>Blog</MobileNavLink>
+              <MobileNavLink href="/services" onClick={() => setIsMenuOpen(false)}>Services</MobileNavLink>
+              <MobileNavLink href="/portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</MobileNavLink>
+              <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
+              <MobileNavLink href="/blog" onClick={() => setIsMenuOpen(false)}>Blog</MobileNavLink>
               <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</MobileNavLink>
               <a 
                 href="/contact"

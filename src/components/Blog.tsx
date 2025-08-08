@@ -3,7 +3,7 @@ import { Calendar, User, ArrowRight } from 'lucide-react';
 
 const articles = [
   {
-    id: 1,
+    id: 'future-of-web-design',
     title: 'The Future of Web Design: AI-Powered Experiences in 2025',
     excerpt: 'Discover how artificial intelligence is revolutionizing web design and creating more personalized, intuitive user experiences.',
     image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -13,7 +13,7 @@ const articles = [
     readTime: '5 min read'
   },
   {
-    id: 2,
+    id: 'conversion-optimization',
     title: 'Conversion Rate Optimization: Psychology Meets Design',
     excerpt: 'Learn how understanding user psychology can dramatically improve your website\'s conversion rates through strategic design decisions.',
     image: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -23,7 +23,7 @@ const articles = [
     readTime: '7 min read'
   },
   {
-    id: 3,
+    id: 'core-web-vitals',
     title: 'Core Web Vitals: The Complete Guide to Performance Optimization',
     excerpt: 'Master Google\'s Core Web Vitals and learn advanced techniques to boost your website\'s performance and search rankings.',
     image: 'https://images.pexels.com/photos/38519/macbook-laptop-ipad-apple-38519.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',

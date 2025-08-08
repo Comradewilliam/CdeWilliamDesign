@@ -99,7 +99,7 @@ export const Portfolio: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-6 w-full">
                     <a 
-                      href="#" 
+                      href={`/portfolio/${project.id}`}
                       className="inline-flex items-center text-white font-medium hover:text-blue-200 transition-colors duration-300"
                     >
                       View Project <ExternalLink size={16} className="ml-2" />
@@ -118,7 +118,7 @@ export const Portfolio: React.FC = () => {
         
         <div className="mt-16 text-center">
           <a 
-            href="#" 
+            href="/portfolio"
             className="inline-block border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg transition-colors duration-300 font-medium"
           >
             View All Projects

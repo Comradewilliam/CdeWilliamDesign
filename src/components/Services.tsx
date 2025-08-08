@@ -81,9 +81,9 @@ export const Services: React.FC = () => {
               
               <a 
                 href="/contact" 
-                className="inline-flex items-center mt-6 text-blue-600 font-medium hover:text-blue-800 transition-colors duration-300 group-hover:translate-x-1"
+                className="inline-flex items-center mt-6 text-blue-600 font-medium hover:text-blue-800 transition-colors duration-300"
               >
-                Learn more →
+                Learn More <ArrowRight size={16} className="ml-1" />
               </a>
             </div>
           ))}
