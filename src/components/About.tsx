@@ -3,22 +3,22 @@ import { Check } from 'lucide-react';
 
 const teamMembers = [
   {
-    name: 'Sophie Masaka',
+    name: 'William Sadiki',
     role: 'Founder & Creative Director',
     image: 'https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    bio: '10+ years of experience in digital design and branding. Sophie leads our creative vision and ensures every project exceeds expectations.'
+    bio: '5+ years of experience in digital design and full-stack development. William leads our creative vision and ensures every project exceeds client expectations with innovative solutions.'
   },
   {
-    name: 'Mark Johnson',
-    role: 'Lead Developer',
+    name: 'Sarah Johnson',
+    role: 'Senior UI/UX Designer',
     image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    bio: 'Full-stack developer with expertise in modern web technologies. Mark brings technical excellence to every project we undertake.'
+    bio: 'Specialized in user-centered design with a passion for creating intuitive digital experiences. Sarah ensures every interface is both beautiful and functional.'
   },
   {
-    name: 'Amelia Chen',
-    role: 'UX/UI Designer',
+    name: 'Michael Chen',
+    role: 'Full-Stack Developer',
     image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    bio: 'User experience specialist with a background in psychology. Amelia creates intuitive interfaces that delight users and drive engagement.'
+    bio: 'Expert in modern web technologies and scalable architecture. Michael brings technical excellence and innovative solutions to every development project.'
   }
 ];
 
@@ -40,39 +40,49 @@ export const About: React.FC = () => {
           
           <div className="space-y-6">
             <h2 className="text-sm font-semibold text-blue-600 uppercase tracking-wider">About Us</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900">Passionate about creating digital experiences that inspire</h3>
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900">Passionate creators of digital experiences that inspire and deliver results</h3>
             <p className="text-lg text-gray-600">
-              Founded in 2023, CdeWilliam Web Design has grown into a team of dedicated designers, developers, and strategists. We combine our passion for design with technical expertise to create websites that not only look stunning but also perform exceptionally.
+              Founded in 2019, CdeWilliam Web Design has evolved into a dynamic team of creative professionals and technical experts. We combine cutting-edge design principles with robust development practices to create digital solutions that drive real business growth.
             </p>
             <p className="text-lg text-gray-600">
-              We believe that great design is about more than aesthetics—it's about solving problems and creating meaningful connections between brands and their audiences.
+              Our philosophy centers on the belief that exceptional design goes beyond aesthetics—it's about solving complex problems, enhancing user experiences, and creating meaningful connections between brands and their audiences in the digital space.
             </p>
             
-            <div className="grid grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-2 gap-6 mt-8">
               <div className="flex items-start">
-                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                   <Check className="h-4 w-4 text-blue-600" />
                 </div>
-                <p className="ml-3 text-gray-700">Award-winning designs</p>
+                <p className="ml-3 text-gray-700 font-medium">Award-winning designs</p>
               </div>
               <div className="flex items-start">
-                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                   <Check className="h-4 w-4 text-blue-600" />
                 </div>
-                <p className="ml-3 text-gray-700">User-centric approach</p>
+                <p className="ml-3 text-gray-700 font-medium">Data-driven approach</p>
               </div>
               <div className="flex items-start">
-                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                   <Check className="h-4 w-4 text-blue-600" />
                 </div>
-                <p className="ml-3 text-gray-700">Technical excellence</p>
+                <p className="ml-3 text-gray-700 font-medium">Cutting-edge technology</p>
               </div>
               <div className="flex items-start">
-                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 flex items-center justify-center">
+                <div className="flex-shrink-0 h-6 w-6 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center">
                   <Check className="h-4 w-4 text-blue-600" />
                 </div>
-                <p className="ml-3 text-gray-700">Dedicated support</p>
+                <p className="ml-3 text-gray-700 font-medium">24/7 support & maintenance</p>
               </div>
+            </div>
+            
+            {/* Call to Action */}
+            <div className="mt-8">
+              <a 
+                href="/contact" 
+                className="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              >
+                Work With Us
+              </a>
             </div>
           </div>
         </div>
@@ -81,7 +91,7 @@ export const About: React.FC = () => {
           <h2 className="text-sm font-semibold text-blue-600 uppercase tracking-wider">Our Team</h2>
           <h3 className="mt-2 text-3xl md:text-4xl font-bold text-gray-900">Meet the creatives behind our success</h3>
           <p className="mt-4 text-lg text-gray-600">
-            Our talented team brings together diverse skills and perspectives to deliver exceptional results for our clients.
+            Our passionate team combines diverse expertise in design, development, and strategy to deliver exceptional digital solutions that exceed expectations.
           </p>
         </div>
         
@@ -89,7 +99,7 @@ export const About: React.FC = () => {
           {teamMembers.map((member, index) => (
             <div 
               key={index} 
-              className="bg-white border border-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
               <img 
                 src={member.image} 
@@ -98,7 +108,7 @@ export const About: React.FC = () => {
               />
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
-                <p className="text-blue-600 font-medium mb-3">{member.role}</p>
+                <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 font-medium mb-3">{member.role}</p>
                 <p className="text-gray-600">{member.bio}</p>
               </div>
             </div>

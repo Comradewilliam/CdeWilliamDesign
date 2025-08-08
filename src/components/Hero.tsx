@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 to-gray-100 overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center bg-gradient-to-br from-blue-50 via-white to-gray-50 overflow-hidden pt-20">
       <div className="absolute right-0 bottom-0 w-2/3 h-2/3 bg-blue-400 opacity-5 rounded-full transform translate-x-1/4 translate-y-1/4"></div>
       <div className="absolute left-0 top-0 w-1/2 h-1/2 bg-blue-300 opacity-5 rounded-full transform -translate-x-1/4 -translate-y-1/4"></div>
       
@@ -11,22 +11,45 @@ export const Hero: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8 md:pr-12">
             <div className="inline-block px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium animate-fadeIn">
-              Award-Winning Web Design Agency
+              🏆 Award-Winning Digital Agency
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-              We create <span className="text-blue-600">digital experiences</span> that matter
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight animate-fadeIn">
+              We craft <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">digital experiences</span> that drive results
             </h1>
-            <p className="text-lg text-gray-600 md:pr-8">
-              CdeWilliam Web Design transforms your brand's vision into captivating digital realities. We combine stunning design with powerful functionality to create websites that deliver results.
+            <p className="text-lg text-gray-600 md:pr-8 animate-fadeIn">
+              Transform your brand's vision into captivating digital realities. We combine cutting-edge design with powerful functionality to create websites that not only look stunning but deliver measurable business results.
             </p>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 py-6 animate-fadeIn">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">150+</div>
+                <div className="text-sm text-gray-600">Projects Delivered</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">98%</div>
+                <div className="text-sm text-gray-600">Client Satisfaction</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600">5+</div>
+                <div className="text-sm text-gray-600">Years Experience</div>
+              </div>
+            </div>
+            
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors duration-300 flex items-center justify-center group">
+              <a 
+                href="#portfolio" 
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg transition-all duration-300 flex items-center justify-center group shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
                 View Our Work
                 <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-              <button className="border border-gray-300 hover:border-blue-600 hover:text-blue-600 text-gray-700 px-8 py-3 rounded-lg transition-colors duration-300">
+              </a>
+              <a 
+                href="/contact" 
+                className="border-2 border-gray-300 hover:border-blue-600 hover:text-blue-600 text-gray-700 px-8 py-4 rounded-lg transition-all duration-300 hover:shadow-md"
+              >
                 Let's Talk
-              </button>
+              </a>
             </div>
           </div>
           
@@ -34,7 +57,7 @@ export const Hero: React.FC = () => {
             <div className="relative z-10 rounded-lg shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-500">
               <img 
                 src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
-                alt="Web Design Showcase" 
+                alt="Modern Web Design Showcase" 
                 className="w-full h-auto"
               />
             </div>
@@ -43,21 +66,23 @@ export const Hero: React.FC = () => {
           </div>
         </div>
         
-        <div className="mt-20 md:mt-32 flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+        <div className="mt-20 md:mt-32 animate-fadeIn">
           <div className="text-center">
-            <p className="text-gray-500 font-medium">Trusted by industry leaders</p>
+            <p className="text-gray-500 font-medium mb-8">Trusted by innovative companies worldwide</p>
           </div>
-          <div className="w-32 text-center">
-            <p className="text-xl font-bold text-gray-700">BRAND ONE</p>
-          </div>
-          <div className="w-32 text-center">
-            <p className="text-xl font-bold text-gray-700">BRAND TWO</p>
-          </div>
-          <div className="w-32 text-center">
-            <p className="text-xl font-bold text-gray-700">BRAND THREE</p>
-          </div>
-          <div className="w-32 text-center">
-            <p className="text-xl font-bold text-gray-700">BRAND FOUR</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+            <div className="text-center">
+              <p className="text-xl font-bold text-gray-700">TechCorp</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xl font-bold text-gray-700">InnovateLab</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xl font-bold text-gray-700">DigitalFlow</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xl font-bold text-gray-700">CreativeHub</p>
+            </div>
           </div>
         </div>
       </div>

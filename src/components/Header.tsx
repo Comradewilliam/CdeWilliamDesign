@@ -35,14 +35,14 @@ export const Header: React.FC = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink href="/services">Services</NavLink>
-            <NavLink href="/portfolio">Portfolio</NavLink>
+            <NavLink href="#services">Services</NavLink>
+            <NavLink href="#portfolio">Portfolio</NavLink>
             <NavLink href="#about">About</NavLink>
-            <NavLink href="/blog">Insights</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+            <NavLink href="#blog">Blog</NavLink>
+            <NavLink href="/contact">Contact</NavLink>
             <a 
               href="/contact"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md transition-colors duration-300"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
               Get Started
             </a>
@@ -61,14 +61,14 @@ export const Header: React.FC = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="container mx-auto px-4 py-4">
             <nav className="flex flex-col space-y-4">
-              <MobileNavLink href="/services" onClick={() => setIsMenuOpen(false)}>Services</MobileNavLink>
-              <MobileNavLink href="/portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</MobileNavLink>
+              <MobileNavLink href="#services" onClick={() => setIsMenuOpen(false)}>Services</MobileNavLink>
+              <MobileNavLink href="#portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</MobileNavLink>
               <MobileNavLink href="#about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
-              <MobileNavLink href="/blog" onClick={() => setIsMenuOpen(false)}>Insights</MobileNavLink>
-              <MobileNavLink href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</MobileNavLink>
+              <MobileNavLink href="#blog" onClick={() => setIsMenuOpen(false)}>Blog</MobileNavLink>
+              <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</MobileNavLink>
               <a 
                 href="/contact"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md transition-colors duration-300"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-300 text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Get Started
