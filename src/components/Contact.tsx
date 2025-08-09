@@ -171,11 +171,11 @@ export const Contact: React.FC = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="">Select a service</option>
-                      <option value="web-design">Web Design</option>
+                      <option value="mobile">Mobile</option>
                       <option value="web-development">Web Development</option>
                       <option value="e-commerce">E-Commerce</option>
                       <option value="branding">Branding</option>
-                      <option value="seo">SEO & Marketing</option>
+                      <option value="academic">Academic Project</option>
                     </select>
                   </div>
                 </div>
