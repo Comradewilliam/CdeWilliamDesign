@@ -123,7 +123,7 @@ export const Contact: React.FC = () => {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="John Doe"
+                      placeholder="Tawakal Ismail"
                     />
                   </div>
                   <div>
