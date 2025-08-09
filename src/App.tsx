@@ -14,6 +14,8 @@ import { AboutPage } from './pages/AboutPage';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPost } from './pages/BlogPost';
 import { ContactPage } from './pages/ContactPage';
+import { AdminLogin } from './pages/AdminLogin';
+import { AdminDashboard } from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
               <Route path="/blog" element={<BlogPage />} />
               <Route path="/blog/:post" element={<BlogPost />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/admin" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
             </Routes>
             <Toaster position="top-right" />
           </div>

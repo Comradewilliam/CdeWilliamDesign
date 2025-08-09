@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Check, MessageCircle } from 'lucide-react';
 
 export const Contact: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -19,30 +19,32 @@ export const Contact: React.FC = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch('https://formspree.io/f/youngwilliamsadiki@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formState)
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setFormState({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: ''
-        });
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    }
+    
+    // Save to localStorage for admin dashboard
+    const submission = {
+      id: Date.now().toString(),
+      ...formState,
+      date: new Date().toLocaleDateString()
+    };
+    
+    const existingSubmissions = JSON.parse(localStorage.getItem('contactSubmissions') || '[]');
+    existingSubmissions.push(submission);
+    localStorage.setItem('contactSubmissions', JSON.stringify(existingSubmissions));
+    
+    setIsSubmitted(true);
+    setFormState({
+      name: '',
+      email: '',
+      phone: '',
+      service: '',
+      message: ''
+    });
   };
 
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Habari,\nNinaitaji mazungumzo nanyi kwa ajili ya kazi yangu\nAsante");
+    window.open(`https://wa.me/255746525852?text=${message}`, '_blank');
+  };
   return (
     <section id="contact" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 md:px-8">
@@ -85,6 +87,16 @@ export const Contact: React.FC = () => {
                   <p className="text-gray-600 mt-1">213 Makongo Juu Street</p>
                   <p className="text-gray-600">Dar Es Salaam, DSM 15121</p>
                 </div>
+              </div>
+              
+              <div className="pt-6">
+                <button
+                  onClick={handleWhatsApp}
+                  className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition-colors duration-300"
+                >
+                  <MessageCircle className="h-5 w-5 mr-2" />
+                  Chat on WhatsApp
+                </button>
               </div>
             </div>
           </div>

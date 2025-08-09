@@ -17,7 +17,7 @@ const articles = [
     title: 'Conversion Rate Optimization: Psychology Meets Design',
     excerpt: 'Learn how understanding user psychology can dramatically improve your website\'s conversion rates through strategic design decisions.',
     image: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    author: 'Sarah Johnson',
+    author: 'Christina KWEKA',
     date: 'December 8, 2024',
     category: 'UX Strategy',
     readTime: '7 min read'
@@ -27,7 +27,7 @@ const articles = [
     title: 'Core Web Vitals: The Complete Guide to Performance Optimization',
     excerpt: 'Master Google\'s Core Web Vitals and learn advanced techniques to boost your website\'s performance and search rankings.',
     image: 'https://images.pexels.com/photos/38519/macbook-laptop-ipad-apple-38519.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    author: 'Michael Chen',
+    author: 'Godfrey KIHOYA',
     date: 'November 28, 2024',
     category: 'Performance',
     readTime: '10 min read'
