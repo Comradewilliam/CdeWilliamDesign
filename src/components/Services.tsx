@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paintbrush, Globe, ShoppingCart, LineChart, Code, Smartphone } from 'lucide-react';
+import { Paintbrush, Globe, ShoppingCart, LineChart, Code, Smartphone, ArrowRight } from 'lucide-react';
 
 const services = [
   {
