@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SEO } from '../components/SEO';
-import { LogOut, Users, FolderPlus, FileText, Trash2, Edit, Plus } from 'lucide-react';
+import { LogOut, Users, FolderPlus, FileText, Trash2, Edit, Plus, UserPlus } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface ContactSubmission {
@@ -28,12 +28,23 @@ interface Project {
   technologies: string[];
 }
 
+interface Admin {
+  id?: string;
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+}
+
 export function AdminDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('contacts');
   const [contacts, setContacts] = useState<ContactSubmission[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [admins, setAdmins] = useState<Admin[]>([]);
+  const [currentAdmin, setCurrentAdmin] = useState<Admin | null>(null);
   const [showProjectForm, setShowProjectForm] = useState(false);
+  const [showAdminForm, setShowAdminForm] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -43,16 +54,29 @@ export function AdminDashboard() {
       navigate('/admin');
       return;
     }
+    
+    // Set current admin
+    try {
+      const admin = JSON.parse(token);
+      setCurrentAdmin(admin);
+    } catch (error) {
+      navigate('/admin');
+      return;
+    }
 
     // Load data from localStorage
     const savedContacts = localStorage.getItem('contactSubmissions');
     const savedProjects = localStorage.getItem('projects');
+    const savedAdmins = localStorage.getItem('admins');
     
     if (savedContacts) {
       setContacts(JSON.parse(savedContacts));
     }
     if (savedProjects) {
       setProjects(JSON.parse(savedProjects));
+    }
+    if (savedAdmins) {
+      setAdmins(JSON.parse(savedAdmins));
     }
   }, [navigate]);
 
@@ -74,6 +98,17 @@ export function AdminDashboard() {
     setProjects(updatedProjects);
     localStorage.setItem('projects', JSON.stringify(updatedProjects));
     toast.success('Project deleted');
+  };
+  
+  const deleteAdmin = (id: string) => {
+    if (admins.length <= 1) {
+      toast.error('Cannot delete the last admin');
+      return;
+    }
+    const updatedAdmins = admins.filter(admin => admin.id !== id);
+    setAdmins(updatedAdmins);
+    localStorage.setItem('admins', JSON.stringify(updatedAdmins));
+    toast.success('Admin deleted');
   };
 
   const ProjectForm = ({ project, onSave, onCancel }: { 
@@ -357,7 +392,115 @@ export function AdminDashboard() {
     setShowProjectForm(false);
     setEditingProject(null);
   };
+  
+  const AdminForm = ({ onSave, onCancel }: { 
+    onSave: (admin: Admin) => void; 
+    onCancel: () => void; 
+  }) => {
+    const [formData, setFormData] = useState<Admin>({
+      name: '',
+      email: '',
+      username: '',
+      password: ''
+    });
 
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      
+      // Check if username already exists
+      const existingAdmin = admins.find(admin => admin.username === formData.username);
+      if (existingAdmin) {
+        toast.error('Username already exists');
+        return;
+      }
+      
+      const newAdmin: Admin = {
+        id: Date.now().toString(),
+        ...formData
+      };
+      onSave(newAdmin);
+    };
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="bg-white rounded-xl max-w-md w-full">
+          <div className="p-6 border-b">
+            <h2 className="text-2xl font-bold">Add New Admin</h2>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+              <input
+                type="text"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <button
+                type="submit"
+                className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Create Admin
+              </button>
+              <button
+                type="button"
+                onClick={onCancel}
+                className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+  
+  const saveAdmin = (admin: Admin) => {
+    const updatedAdmins = [...admins, admin];
+    setAdmins(updatedAdmins);
+    localStorage.setItem('admins', JSON.stringify(updatedAdmins));
+    setShowAdminForm(false);
+    toast.success('Admin created successfully');
+  };
   return (
     <>
       <SEO title="Admin Dashboard" description="Admin dashboard for CDE William Design" />
@@ -392,13 +535,27 @@ export function AdminDashboard() {
               Contact Submissions ({contacts.length})
             </button>
             <button
-              onClick={() => setActiveTab('projects')}
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+              {currentAdmin && (
+                <p className="text-sm text-gray-600">Welcome, {currentAdmin.name}</p>
+              )}
+            </div>
               className={`flex items-center px-4 py-2 rounded-lg ${
                 activeTab === 'projects' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
               }`}
             >
               <FolderPlus className="w-5 h-5 mr-2" />
               Projects ({projects.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('admins')}
+              className={`flex items-center px-4 py-2 rounded-lg ${
+                activeTab === 'admins' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
+              }`}
+            >
+              <UserPlus className="w-5 h-5 mr-2" />
+              Admins ({admins.length})
             </button>
           </div>
 
@@ -506,6 +663,64 @@ export function AdminDashboard() {
               )}
             </div>
           )}
+
+          {/* Admins Tab */}
+          {activeTab === 'admins' && (
+            <div className="bg-white rounded-lg shadow">
+              <div className="p-6 border-b flex justify-between items-center">
+                <h2 className="text-xl font-semibold">Admin Users</h2>
+                <button
+                  onClick={() => setShowAdminForm(true)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Admin
+                </button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {admins.map((admin) => (
+                      <tr key={admin.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {admin.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {admin.email}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {admin.username}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {admins.length > 1 && (
+                            <button
+                              onClick={() => deleteAdmin(admin.id!)}
+                              className="text-red-600 hover:text-red-900"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {admins.length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    No admin users found.
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -518,6 +733,14 @@ export function AdminDashboard() {
             setShowProjectForm(false);
             setEditingProject(null);
           }}
+        />
+      )}
+      
+      {/* Admin Form Modal */}
+      {showAdminForm && (
+        <AdminForm
+          onSave={saveAdmin}
+          onCancel={() => setShowAdminForm(false)}
         />
       )}
     </>

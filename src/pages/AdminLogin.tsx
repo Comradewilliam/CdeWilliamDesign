@@ -14,13 +14,32 @@ export function AdminLogin() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simple authentication (in production, use proper authentication)
-    if (credentials.username === 'admin' && credentials.password === 'cdewilliam2024') {
-      localStorage.setItem('adminToken', 'authenticated');
+    // Get stored admins or use default admin
+    const storedAdmins = JSON.parse(localStorage.getItem('admins') || '[]');
+    const defaultAdmin = {
+      name: 'Young Sadiki',
+      email: 'youngwilliamsadiki@gmail.com',
+      username: 'cdewilliam',
+      password: 'QAZzaq123'
+    };
+    
+    // If no admins stored, add default admin
+    if (storedAdmins.length === 0) {
+      storedAdmins.push(defaultAdmin);
+      localStorage.setItem('admins', JSON.stringify(storedAdmins));
+    }
+    
+    // Check credentials
+    const validAdmin = storedAdmins.find((admin: any) => 
+      admin.username === credentials.username && admin.password === credentials.password
+    );
+    
+    if (validAdmin) {
+      localStorage.setItem('adminToken', JSON.stringify(validAdmin));
       toast.success('Login successful!');
       navigate('/admin/dashboard');
     } else {
-      toast.error('Invalid credentials');
+      toast.error('Invalid username or password');
     }
     setIsLoading(false);
   };
