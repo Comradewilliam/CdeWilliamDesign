@@ -5,72 +5,20 @@ import { Footer } from '../components/Footer';
 import { SEO } from '../components/SEO';
 import { ArrowRight, ExternalLink, Calendar, User, Tag } from 'lucide-react';
 
-const projectDetails = {
-  'modern-e-commerce': {
-    title: 'Modern E-Commerce Platform',
-    client: 'TechStore Inc.',
-    year: '2024',
-    category: 'E-Commerce',
-    description: 'A comprehensive e-commerce solution with custom product pages and seamless checkout flow.',
-    challenge: 'TechStore Inc. needed a scalable e-commerce platform that could handle high traffic volumes while providing an exceptional user experience. Their existing platform was outdated and couldn\'t support their growing product catalog and customer base.',
-    solution: 'We developed a modern, responsive e-commerce platform using React and Node.js, with a focus on performance optimization and user experience. The solution included custom product configurators, advanced search functionality, and a streamlined checkout process.',
-    results: [
-      '50% increase in conversion rate',
-      '30% reduction in cart abandonment',
-      '200% improvement in page load speed',
-      '40% increase in average order value'
-    ],
-    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'AWS', 'Redis'],
-    images: [
-      'https://images.pexels.com/photos/6956903/pexels-photo-6956903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-    ]
-  },
-  'corporate-website': {
-    title: 'Corporate Website Redesign',
-    client: 'Global Corp',
-    year: '2024',
-    category: 'Web Design',
-    description: 'Complete overhaul of a corporate website with modern UI/UX and improved user journey.',
-    challenge: 'Global Corp\'s website was outdated and didn\'t reflect their position as an industry leader. The site had poor user experience, low conversion rates, and wasn\'t mobile-optimized.',
-    solution: 'We created a modern, responsive website with a focus on user experience and brand storytelling. The new design features intuitive navigation, compelling content, and clear calls-to-action throughout the user journey.',
-    results: [
-      '40% increase in time on site',
-      '25% increase in lead generation',
-      '60% improvement in mobile engagement',
-      '35% reduction in bounce rate'
-    ],
-    technologies: ['Next.js', 'TailwindCSS', 'Framer Motion', 'Contentful', 'Vercel'],
-    images: [
-      'https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-    ]
-  },
-  'restaurant-app': {
-    title: 'Restaurant Booking App',
-    client: 'Bistro Elite',
-    year: '2024',
-    category: 'Mobile',
-    description: 'Mobile application for restaurant reservations with real-time availability and notifications.',
-    challenge: 'Bistro Elite needed a modern booking system to replace their outdated phone-based reservation system. They wanted to reduce no-shows and improve customer experience.',
-    solution: 'We developed a comprehensive mobile app with real-time table availability, push notifications, and integrated payment processing. The app includes features for menu browsing, special offers, and customer loyalty programs.',
-    results: [
-      '60% increase in online bookings',
-      '40% reduction in no-shows',
-      '50% improvement in customer satisfaction',
-      '25% increase in repeat customers'
-    ],
-    technologies: ['React Native', 'Firebase', 'Node.js', 'Push Notifications', 'Stripe'],
-    images: [
-      'https://images.pexels.com/photos/687824/pexels-photo-687824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-      'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-    ]
-  }
-};
-
 export function ProjectPage() {
   const { project } = useParams<{ project: string }>();
-  const details = project ? projectDetails[project as keyof typeof projectDetails] : null;
+  
+  // Get project from localStorage
+  const getProjectDetails = (projectId: string) => {
+    const stored = localStorage.getItem('projects');
+    if (stored) {
+      const projects = JSON.parse(stored);
+      return projects.find((p: any) => p.id === projectId);
+    }
+    return null;
+  };
+
+  const details = project ? getProjectDetails(project) : null;
 
   if (!details) {
     return (
@@ -114,7 +62,7 @@ export function ProjectPage() {
                 <span className="text-blue-100">{details.year}</span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                {details.title}
+                {details.name}
               </h1>
               <p className="text-xl text-blue-100 mb-8">
                 {details.description}
@@ -137,11 +85,11 @@ export function ProjectPage() {
         <div className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 md:px-8">
             <div className="grid md:grid-cols-2 gap-8">
-              {details.images.map((image, index) => (
+              {details.thumbnails.map((image: string, index: number) => (
                 <div key={index} className="rounded-xl overflow-hidden shadow-lg">
                   <img 
                     src={image} 
-                    alt={`${details.title} - Image ${index + 1}`}
+                    alt={`${details.name} - Image ${index + 1}`}
                     className="w-full h-64 md:h-80 object-cover"
                   />
                 </div>
@@ -157,18 +105,18 @@ export function ProjectPage() {
               <div className="lg:col-span-2 space-y-12">
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">The Challenge</h2>
-                  <p className="text-lg text-gray-600 leading-relaxed">{details.challenge}</p>
+                  <p className="text-lg text-gray-600 leading-relaxed">{details.challenge || 'Challenge details not available.'}</p>
                 </div>
                 
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Solution</h2>
-                  <p className="text-lg text-gray-600 leading-relaxed">{details.solution}</p>
+                  <p className="text-lg text-gray-600 leading-relaxed">{details.solution || 'Solution details not available.'}</p>
                 </div>
                 
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Results</h2>
                   <div className="grid md:grid-cols-2 gap-6">
-                    {details.results.map((result, index) => (
+                    {(details.results || []).map((result: string, index: number) => (
                       <div key={index} className="bg-blue-50 p-6 rounded-lg">
                         <p className="text-lg font-semibold text-blue-900">{result}</p>
                       </div>
@@ -199,7 +147,7 @@ export function ProjectPage() {
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Technologies Used</h3>
                   <div className="flex flex-wrap gap-2">
-                    {details.technologies.map((tech, index) => (
+                    {(details.technologies || []).map((tech: string, index: number) => (
                       <span 
                         key={index}
                         className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"

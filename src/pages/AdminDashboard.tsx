@@ -40,12 +40,16 @@ export function AdminDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('contacts');
   const [contacts, setContacts] = useState<ContactSubmission[]>([]);
+  const [projectInquiries, setProjectInquiries] = useState<any[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [servicePricing, setServicePricing] = useState<any[]>([]);
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [currentAdmin, setCurrentAdmin] = useState<Admin | null>(null);
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [showAdminForm, setShowAdminForm] = useState(false);
+  const [showPricingForm, setShowPricingForm] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [editingPricing, setEditingPricing] = useState<any>(null);
 
   useEffect(() => {
     // Check authentication
@@ -66,14 +70,22 @@ export function AdminDashboard() {
 
     // Load data from localStorage
     const savedContacts = localStorage.getItem('contactSubmissions');
+    const savedInquiries = localStorage.getItem('projectInquiries');
     const savedProjects = localStorage.getItem('projects');
+    const savedPricing = localStorage.getItem('servicePricing');
     const savedAdmins = localStorage.getItem('admins');
     
     if (savedContacts) {
       setContacts(JSON.parse(savedContacts));
     }
+    if (savedInquiries) {
+      setProjectInquiries(JSON.parse(savedInquiries));
+    }
     if (savedProjects) {
       setProjects(JSON.parse(savedProjects));
+    }
+    if (savedPricing) {
+      setServicePricing(JSON.parse(savedPricing));
     }
     if (savedAdmins) {
       setAdmins(JSON.parse(savedAdmins));
@@ -91,6 +103,13 @@ export function AdminDashboard() {
     setContacts(updatedContacts);
     localStorage.setItem('contactSubmissions', JSON.stringify(updatedContacts));
     toast.success('Contact deleted');
+  };
+
+  const deleteInquiry = (id: string) => {
+    const updatedInquiries = projectInquiries.filter(inquiry => inquiry.id !== id);
+    setProjectInquiries(updatedInquiries);
+    localStorage.setItem('projectInquiries', JSON.stringify(updatedInquiries));
+    toast.success('Inquiry deleted');
   };
 
   const deleteProject = (id: string) => {
@@ -532,7 +551,16 @@ export function AdminDashboard() {
               }`}
             >
               <Users className="w-5 h-5 mr-2" />
-              Contact Submissions ({contacts.length})
+              Contacts ({contacts.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('inquiries')}
+              className={`flex items-center px-4 py-2 rounded-lg ${
+                activeTab === 'inquiries' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
+              }`}
+            >
+              <FileText className="w-5 h-5 mr-2" />
+              Project Inquiries ({projectInquiries.length})
             </button>
             <button
               onClick={() => setActiveTab('projects')}
@@ -542,6 +570,15 @@ export function AdminDashboard() {
             >
               <FolderPlus className="w-5 h-5 mr-2" />
               Projects ({projects.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('pricing')}
+              className={`flex items-center px-4 py-2 rounded-lg ${
+                activeTab === 'pricing' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
+              }`}
+            >
+              <FileText className="w-5 h-5 mr-2" />
+              Service Pricing
             </button>
             <button
               onClick={() => setActiveTab('admins')}
@@ -611,6 +648,67 @@ export function AdminDashboard() {
             </div>
           )}
 
+          {/* Project Inquiries Tab */}
+          {activeTab === 'inquiries' && (
+            <div className="bg-white rounded-lg shadow">
+              <div className="p-6 border-b">
+                <h2 className="text-xl font-semibold">Project Inquiries</h2>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Services</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Budget</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Timeline</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {projectInquiries.map((inquiry) => (
+                      <tr key={inquiry.id}>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                          {inquiry.name}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {inquiry.email}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {inquiry.services.join(', ')}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {inquiry.budget || 'Not specified'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {inquiry.timeline || 'Not specified'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {inquiry.date}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          <button
+                            onClick={() => deleteInquiry(inquiry.id)}
+                            className="text-red-600 hover:text-red-900"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {projectInquiries.length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    No project inquiries yet.
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Projects Tab */}
           {activeTab === 'projects' && (
             <div className="bg-white rounded-lg shadow">
@@ -654,6 +752,47 @@ export function AdminDashboard() {
               {projects.length === 0 && (
                 <div className="text-center py-8 text-gray-500">
                   No projects yet. Create your first project!
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Service Pricing Tab */}
+          {activeTab === 'pricing' && (
+            <div className="bg-white rounded-lg shadow">
+              <div className="p-6 border-b flex justify-between items-center">
+                <h2 className="text-xl font-semibold">Service Pricing</h2>
+                <button
+                  onClick={() => setShowPricingForm(true)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Update Pricing
+                </button>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                {servicePricing.map((service) => (
+                  <div key={service.id} className="border rounded-lg p-4">
+                    <h3 className="font-semibold text-lg mb-2">{service.name}</h3>
+                    <p className="text-2xl font-bold text-blue-600 mb-2">${service.basePrice.toLocaleString()}</p>
+                    <p className="text-gray-600 text-sm mb-4">{service.description}</p>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setEditingPricing(service);
+                          setShowPricingForm(true);
+                        }}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {servicePricing.length === 0 && (
+                <div className="text-center py-8 text-gray-500">
+                  No pricing data available.
                 </div>
               )}
             </div>
