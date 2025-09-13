@@ -535,12 +535,7 @@ export function AdminDashboard() {
               Contact Submissions ({contacts.length})
             </button>
             <button
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
-              {currentAdmin && (
-                <p className="text-sm text-gray-600">Welcome, {currentAdmin.name}</p>
-              )}
-            </div>
+              onClick={() => setActiveTab('projects')}
               className={`flex items-center px-4 py-2 rounded-lg ${
                 activeTab === 'projects' ? 'bg-blue-600 text-white' : 'bg-white text-gray-700'
               }`}
