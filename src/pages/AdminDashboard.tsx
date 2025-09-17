@@ -48,8 +48,11 @@ export function AdminDashboard() {
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [showAdminForm, setShowAdminForm] = useState(false);
   const [showPricingForm, setShowPricingForm] = useState(false);
+  const [showBlogForm, setShowBlogForm] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const [editingPricing, setEditingPricing] = useState<any>(null);
+  const [editingBlogPost, setEditingBlogPost] = useState<any>(null);
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
 
   useEffect(() => {
     // Check authentication
@@ -74,6 +77,7 @@ export function AdminDashboard() {
     const savedProjects = localStorage.getItem('projects');
     const savedPricing = localStorage.getItem('servicePricing');
     const savedAdmins = localStorage.getItem('admins');
+    const savedBlogPosts = localStorage.getItem('blogPosts');
     
     if (savedContacts) {
       setContacts(JSON.parse(savedContacts));
@@ -89,6 +93,9 @@ export function AdminDashboard() {
     }
     if (savedAdmins) {
       setAdmins(JSON.parse(savedAdmins));
+    }
+    if (savedBlogPosts) {
+      setBlogPosts(JSON.parse(savedBlogPosts));
     }
   }, [navigate]);
 
@@ -128,6 +135,13 @@ export function AdminDashboard() {
     setAdmins(updatedAdmins);
     localStorage.setItem('admins', JSON.stringify(updatedAdmins));
     toast.success('Admin deleted');
+  };
+
+  const deleteBlogPost = (id: string) => {
+    const updatedPosts = blogPosts.filter(post => post.id !== id);
+    setBlogPosts(updatedPosts);
+    localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+    toast.success('Blog post deleted');
   };
 
   const ProjectForm = ({ project, onSave, onCancel }: { 

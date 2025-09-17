@@ -78,6 +78,94 @@ const articles = [
 export function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('All');
 
+  // Get blog posts from localStorage (admin managed)
+  const getBlogPosts = () => {
+    const stored = localStorage.getItem('blogPosts');
+    if (stored) {
+      return JSON.parse(stored);
+    }
+    
+    // Default blog posts if none exist
+    const defaultPosts = [
+      {
+        id: 'future-of-web-design',
+        title: 'The Future of Web Design: AI-Powered Experiences in 2025',
+        excerpt: 'Discover how artificial intelligence is revolutionizing web design and creating more personalized, intuitive user experiences that adapt to user behavior in real-time.',
+        image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        author: 'Young Sadiki',
+        authorRole: 'Founder & Creative Director',
+        date: 'December 15, 2024',
+        category: 'Design',
+        readTime: '5 min read',
+        featured: true
+      },
+      {
+        id: 'conversion-optimization',
+        title: 'Conversion Rate Optimization: Psychology Meets Design',
+        excerpt: 'Learn how understanding user psychology can dramatically improve your website\'s conversion rates through strategic design decisions and behavioral triggers.',
+        image: 'https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        author: 'Christina Kweka',
+        authorRole: 'Senior UI/UX Designer',
+        date: 'December 8, 2024',
+        category: 'Business',
+        readTime: '7 min read',
+        featured: true
+      },
+      {
+        id: 'core-web-vitals',
+        title: 'Core Web Vitals: The Complete Guide to Performance Optimization',
+        excerpt: 'Master Google\'s Core Web Vitals and learn advanced techniques to boost your website\'s performance, search rankings, and user experience.',
+        image: 'https://images.pexels.com/photos/38519/macbook-laptop-ipad-apple-38519.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        author: 'Godfrey Kihoya',
+        authorRole: 'Full-Stack Developer',
+        date: 'November 28, 2024',
+        category: 'Development',
+        readTime: '10 min read',
+        featured: false
+      },
+      {
+        id: 'responsive-design-2025',
+        title: 'Responsive Design in 2025: Beyond Mobile-First',
+        excerpt: 'Explore the evolution of responsive design and how to create websites that work seamlessly across all devices and screen sizes.',
+        image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        author: 'Christina Kweka',
+        authorRole: 'Senior UI/UX Designer',
+        date: 'November 20, 2024',
+        category: 'Design',
+        readTime: '6 min read',
+        featured: false
+      },
+      {
+        id: 'seo-trends-2025',
+        title: 'SEO Trends That Will Dominate 2025',
+        excerpt: 'Stay ahead of the competition with these emerging SEO trends and strategies that will shape search engine optimization in 2025.',
+        image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        author: 'Young Sadiki',
+        authorRole: 'Founder & Creative Director',
+        date: 'November 15, 2024',
+        category: 'SEO',
+        readTime: '8 min read',
+        featured: false
+      },
+      {
+        id: 'javascript-frameworks-comparison',
+        title: 'React vs Vue vs Angular: Which Framework to Choose in 2025',
+        excerpt: 'A comprehensive comparison of the top JavaScript frameworks to help you make the right choice for your next project.',
+        image: 'https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        author: 'Godfrey Kihoya',
+        authorRole: 'Full-Stack Developer',
+        date: 'November 10, 2024',
+        category: 'Development',
+        readTime: '12 min read',
+        featured: false
+      }
+    ];
+    
+    localStorage.setItem('blogPosts', JSON.stringify(defaultPosts));
+    return defaultPosts;
+  };
+
+  const articles = getBlogPosts();
   const filteredArticles = activeCategory === 'All' 
     ? articles 
     : articles.filter(article => article.category === activeCategory);
