@@ -58,6 +58,7 @@ export const Footer: React.FC = () => {
               <li><a href="/about" className="text-gray-400 hover:text-white transition-colors duration-300">About Us</a></li>
               <li><a href="/blog" className="text-gray-400 hover:text-white transition-colors duration-300">Blog</a></li>
               <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors duration-300">Contact</a></li>
+              <li><a href="/admin" className="text-gray-400 hover:text-white transition-colors duration-300">Admin</a></li>
             </ul>
           </div>
           
@@ -77,17 +78,13 @@ export const Footer: React.FC = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400">
-            &copy; {currentYear} CdeWilliam Web Design. All rights reserved.
+            &copy; {currentYear} Young William SADIKI. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Terms of Service</a>
-            <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">Sitemap</a>
+            <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-300">Privacy Policy</a>
+            <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors duration-300">Terms of Service</a>
+            <a href="/sitemap" className="text-gray-400 hover:text-white transition-colors duration-300">Sitemap</a>
           </div>
-        </div>
-        
-        <div className="text-center mt-8 text-gray-500 text-sm">
-          Made with <Heart className="inline-block h-4 w-4 text-red-500" /> to Young William SADIKI
         </div>
       </div>
     </footer>

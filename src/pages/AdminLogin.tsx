@@ -16,16 +16,33 @@ export function AdminLogin() {
 
     // Get stored admins or use default admin
     const storedAdmins = JSON.parse(localStorage.getItem('admins') || '[]');
-    const defaultAdmin = {
-      name: 'Young Sadiki',
-      email: 'youngwilliamsadiki@gmail.com',
-      username: 'cdewilliam',
-      password: 'QAZzaq123'
-    };
+    const defaultAdmins = [
+      {
+        id: '1',
+        name: 'Young Sadiki',
+        email: 'youngwilliamsadiki@gmail.com',
+        username: 'cdewilliam',
+        password: 'QAZzaq123'
+      },
+      {
+        id: '2',
+        name: 'Christina Kweka',
+        email: 'christina@cdewilliamdesign.com',
+        username: 'kweka',
+        password: 'QAZzaq123'
+      },
+      {
+        id: '3',
+        name: 'Godfrey Kihoya',
+        email: 'godfrey@cdewilliamdesign.com',
+        username: 'kihoya',
+        password: 'QAZzaq123'
+      }
+    ];
     
     // If no admins stored, add default admin
     if (storedAdmins.length === 0) {
-      storedAdmins.push(defaultAdmin);
+      storedAdmins.push(...defaultAdmins);
       localStorage.setItem('admins', JSON.stringify(storedAdmins));
     }
     

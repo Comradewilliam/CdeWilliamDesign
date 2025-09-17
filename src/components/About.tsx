@@ -5,19 +5,19 @@ const teamMembers = [
   {
     name: 'Young SADIKI',
     role: 'Founder & Creative Director',
-    image: 'https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: '/public/SADIKI.jpg',
     bio: '5+ years of experience in digital design and full-stack development. William leads our creative vision and ensures every project exceeds client expectations with innovative solutions.'
   },
   {
     name: 'Christina KWEKA',
     role: 'Senior UI/UX Designer',
-    image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: '/public/KWEKA.jpg',
     bio: 'Specialized in user-centered design with a passion for creating intuitive digital experiences. Christina ensures every interface is both beautiful and functional.'
   },
   {
     name: 'Godfrey KIHOYA',
     role: 'Full-Stack Developer',
-    image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: '/public/KIHOYA.jpg',
     bio: 'Expert in modern web technologies and scalable architecture. Godfrey brings technical excellence and innovative solutions to every development project.'
   }
 ];

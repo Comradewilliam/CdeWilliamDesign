@@ -40,7 +40,6 @@ export const Header: React.FC = () => {
             <NavLink href="/about">About</NavLink>
             <NavLink href="/blog">Blog</NavLink>
             <NavLink href="/contact">Contact</NavLink>
-            <NavLink href="/admin">Admin</NavLink>
             <a 
               href="/contact"
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
@@ -67,7 +66,6 @@ export const Header: React.FC = () => {
               <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
               <MobileNavLink href="/blog" onClick={() => setIsMenuOpen(false)}>Blog</MobileNavLink>
               <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</MobileNavLink>
-              <MobileNavLink href="/admin" onClick={() => setIsMenuOpen(false)}>Admin</MobileNavLink>
               <a 
                 href="/contact"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-300 text-center"

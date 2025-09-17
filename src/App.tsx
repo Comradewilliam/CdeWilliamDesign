@@ -16,6 +16,9 @@ import { BlogPost } from './pages/BlogPost';
 import { ContactPage } from './pages/ContactPage';
 import { AdminLogin } from './pages/AdminLogin';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
+import { Sitemap } from './pages/Sitemap';
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin" element={<AdminLogin />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/sitemap" element={<Sitemap />} />
             </Routes>
             <Toaster position="top-right" />
           </div>

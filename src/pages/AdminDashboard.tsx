@@ -772,17 +772,10 @@ export function AdminDashboard() {
           )}
 
           {/* Service Pricing Tab */}
-          {activeTab === 'pricing' && (
+          {activeTab === 'pricing' && currentAdmin?.name === 'Young Sadiki' && (
             <div className="bg-white rounded-lg shadow">
               <div className="p-6 border-b flex justify-between items-center">
                 <h2 className="text-xl font-semibold">Service Pricing</h2>
-                <button
-                  onClick={() => setShowPricingForm(true)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Update Pricing
-                </button>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
                 {servicePricing.map((service) => (
@@ -812,8 +805,56 @@ export function AdminDashboard() {
             </div>
           )}
 
+          {/* Blog Posts Tab */}
+          {activeTab === 'blog' && (
+            <div className="bg-white rounded-lg shadow">
+              <div className="p-6 border-b flex justify-between items-center">
+                <h2 className="text-xl font-semibold">Blog Posts</h2>
+                <button
+                  onClick={() => setShowBlogForm(true)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Blog Post
+                </button>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                {blogPosts.map((post) => (
+                  <div key={post.id} className="border rounded-lg p-4">
+                    <img src={post.image} alt={post.title} className="w-full h-32 object-cover rounded mb-3" />
+                    <h3 className="font-semibold text-lg mb-2">{post.title}</h3>
+                    <p className="text-gray-600 text-sm mb-2">By: {post.author}</p>
+                    <p className="text-gray-600 text-sm mb-2">Category: {post.category}</p>
+                    <p className="text-gray-600 text-sm mb-4">Date: {post.date}</p>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => {
+                          setEditingBlogPost(post);
+                          setShowBlogForm(true);
+                        }}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => deleteBlogPost(post.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {blogPosts.length === 0 && (
+                <div className="text-center py-8 text-gray-500">
+                  No blog posts yet. Create your first post!
+                </div>
+              )}
+            </div>
+          )}
           {/* Admins Tab */}
-          {activeTab === 'admins' && (
+          {activeTab === 'admins' && currentAdmin?.name === 'Young Sadiki' && (
             <div className="bg-white rounded-lg shadow">
               <div className="p-6 border-b flex justify-between items-center">
                 <h2 className="text-xl font-semibold">Admin Users</h2>
@@ -832,6 +873,7 @@ export function AdminDashboard() {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Email</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Username</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                     </tr>
                   </thead>
@@ -846,6 +888,11 @@ export function AdminDashboard() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {admin.username}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {admin.name === 'Young Sadiki' ? 'Founder & Creative Director' : 
+                           admin.name === 'Christina Kweka' ? 'Senior UI/UX Designer' :
+                           admin.name === 'Godfrey Kihoya' ? 'Full-Stack Developer' : 'Admin'}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {admins.length > 1 && (
@@ -889,6 +936,30 @@ export function AdminDashboard() {
         <AdminForm
           onSave={saveAdmin}
           onCancel={() => setShowAdminForm(false)}
+        />
+      )}
+
+      {/* Pricing Form Modal */}
+      {showPricingForm && (
+        <PricingForm
+          pricing={editingPricing || undefined}
+          onSave={savePricing}
+          onCancel={() => {
+            setShowPricingForm(false);
+            setEditingPricing(null);
+          }}
+        />
+      )}
+
+      {/* Blog Form Modal */}
+      {showBlogForm && (
+        <BlogForm
+          post={editingBlogPost || undefined}
+          onSave={saveBlogPost}
+          onCancel={() => {
+            setShowBlogForm(false);
+            setEditingBlogPost(null);
+          }}
         />
       )}
     </>
